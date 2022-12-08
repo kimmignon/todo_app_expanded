@@ -1,6 +1,3 @@
-import 'dart:ffi';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TitleWidget extends StatelessWidget {
@@ -10,10 +7,11 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         //padding: EdgeInsets.all(24),
+        // ignore: prefer_const_constructors
         padding: EdgeInsets.all(24),
         child: Container(
           //width: double.infinity,
-          padding: EdgeInsets.fromLTRB(48, 12, 48, 12),
+          padding: const EdgeInsets.fromLTRB(48, 12, 48, 12),
           decoration: BoxDecoration(
             color: Colors.grey.shade200,
             borderRadius: BorderRadius.circular(12),
@@ -21,9 +19,9 @@ class TitleWidget extends StatelessWidget {
               BoxShadow(
                 color: Colors.grey.shade400,
                 blurRadius: 15,
-                offset: Offset(5, 5),
+                offset: const Offset(5, 5),
               ),
-              BoxShadow(
+              const BoxShadow(
                 color: Colors.white,
                 blurRadius: 15,
                 offset: Offset(-5, -5),

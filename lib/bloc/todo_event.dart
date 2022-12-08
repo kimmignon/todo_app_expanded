@@ -1,23 +1,10 @@
 part of 'todo_bloc.dart';
 
-//Hierin events definiëren
 @immutable
 abstract class TodoEvent {}
 
-//Event dat zegt dat een todo item is afgewerkt
-//Krijgt een todo item binnen
-class ToDoCompletedEvent extends TodoEvent {
-  final ToDoItem item;
-
-  ToDoCompletedEvent({required this.item});
-}
-
-//Krijgt ook een todo item binnen
-class ToDoUncompletedEvent extends TodoEvent {
-  final ToDoItem item;
-
-  ToDoUncompletedEvent({required this.item});
-}
+//For when any change happens to database
+class ToDoListUpdateEvent extends TodoEvent {}
 
 class ToDoCreatedEvent extends TodoEvent {
   final String title;
@@ -29,4 +16,11 @@ class ToDoDeleteEvent extends TodoEvent {
   final ToDoItem item;
 
   ToDoDeleteEvent({required this.item});
+}
+
+class ToggleTodoEvent extends TodoEvent {
+  final ToDoItem item;
+  final bool status;
+
+  ToggleTodoEvent({required this.item, required this.status});
 }

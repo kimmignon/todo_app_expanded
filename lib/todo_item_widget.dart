@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/bloc/todo_bloc.dart';
-import 'package:todo_app/todo_item.dart';
+import 'package:todo_app/models/todo_item.dart';
 
-//Deze klasse kan geen data aanpassen van todolist klasse
 class ToDoItemWidget extends StatelessWidget {
-  //Krijgt todo item binnen als eigenschap
   final ToDoItem item;
 
   const ToDoItemWidget({super.key, required this.item});
@@ -23,9 +21,9 @@ class ToDoItemWidget extends StatelessWidget {
             BoxShadow(
               color: Colors.grey.shade400,
               blurRadius: 15,
-              offset: Offset(5, 5),
+              offset: const Offset(5, 5),
             ),
-            BoxShadow(
+            const BoxShadow(
               color: Colors.white,
               blurRadius: 15,
               offset: Offset(-5, -5),
@@ -33,32 +31,24 @@ class ToDoItemWidget extends StatelessWidget {
           ],
         ),
         child: Row(
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            //Checkbox of item
             Checkbox(
-              //heeft waarde van het meegegeven todo item
               value: item.isCompleted,
-              //Bloc aanspreken en hierop events emitten
               onChanged: (value) {
-                if (value ?? false) {
-                  BlocProvider.of<TodoBloc>(context)
-                      .add(ToDoCompletedEvent(item: item));
-                } else {
-                  BlocProvider.of<TodoBloc>(context)
-                      .add(ToDoUncompletedEvent(item: item));
-                }
+                context
+                    .read<TodoBloc>()
+                    .add(ToggleTodoEvent(item: item, status: value ?? false));
               },
             ),
-            //Op deze manier deletebutton
+            //Title of item
             Expanded(
               child: Text(
-                //title van meegegeven todo item
                 item.title,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: Colors.purple,
-                    //Wanneer item completed is, lijn doortrekken
                     decoration:
                         item.isCompleted ? TextDecoration.lineThrough : null),
               ),
@@ -71,7 +61,7 @@ class ToDoItemWidget extends StatelessWidget {
               },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.red,
-                shape: CircleBorder(),
+                shape: const CircleBorder(),
               ),
               child: const Text(
                 "-",

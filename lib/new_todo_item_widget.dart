@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/bloc/todo_bloc.dart';
 
 class NewToDoItemWidget extends StatefulWidget {
-  NewToDoItemWidget({super.key});
+  const NewToDoItemWidget({super.key});
 
   @override
   State<NewToDoItemWidget> createState() => _NewToDoItemWidgetState();

@@ -1,7 +1,13 @@
 part of 'todo_bloc.dart';
 
-class TodoState {
-  List<ToDoItem> items;
+@immutable
+abstract class TodoState {}
 
-  TodoState({required this.items});
+//State for waiting on database
+class TodoLoadingState extends TodoState {}
+
+class TodoLoadedState extends TodoState {
+  final List<ToDoItem> items;
+
+  TodoLoadedState(this.items);
 }
